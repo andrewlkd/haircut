@@ -29,7 +29,7 @@ def text_payload():
     data = request.get_json()
     patient_id = data['patient_id']
     text = data['text']
-    dir = 'examples/patient-'+ str(patient_id) # get folder associated to patient
+    dir = '../examples/patient-'+ str(patient_id) # get folder associated to patient
     if os.path.isdir(dir):
         patient_data = [os.path.join(dir,file) for file in os.listdir(dir) if file.endswith(tuple(allowed_extensions))]
     else:
