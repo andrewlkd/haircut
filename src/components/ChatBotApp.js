@@ -52,7 +52,7 @@ export default function ChatbotApp(props) {
     else if (data.partial_result.startsWith('???')) {
       // setShowAlert(true);
       const cleanedContent = data.partial_result.replace(/\?/g, '');
-      const values = "patient name, age, presenting problem, and history"
+      const values = "patient name, age, presenting problem, and allergies"
       axios.post('http://127.0.0.1:5000/api/patient/summary', { values: values, patient_id: props.patientId })
       .then(response => {
         console.log(response.data);

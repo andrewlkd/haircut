@@ -1,13 +1,10 @@
-DESCRIPTION: 
-MRI demonstrated right contrast-enhancing temporal mass.
-(Medical Transcription Sample Report)
-
 SUBJECTIVE: 
 The patient is a 55-year-old male that was last seen in clinic on 
 07/29/2008 with diagnosis of new onset seizures and an MRI scan, which 
 demonstrated right contrast-enhancing temporal mass. Given the 
 characteristics of this mass and his new onset seizures, it is 
 significantly concerning for a high-grade glioma.
+Name: Emma James.
 
 OBJECTIVE: 
 The patient is alert and oriented times three, GCS of 15. Cranial nerves 
