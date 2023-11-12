@@ -1,7 +1,7 @@
 PATIENT DESCRIPTION:
 A 49-year-old man with respiratory distress, history of coronary artery 
 disease with prior myocardial infarctions, and recently admitted with 
-pneumonia and respiratory failure.
+pneumonia and respiratory failure. Called Simon Downs.
 
 SUMMARY: 
 The patient is a 49-year-old man who was admitted to the hospital in 
@@ -24,6 +24,7 @@ HEART: Showed tachycardia without murmurs or gallops.
 PULMONARY: Status showed decreased breath sounds, but no clear-cut rales 
 or wheezes.
 EXTREMITIES: Free of edema.
+ALLERGIIC TO PENECILLIN
 
 ADMISSION DIAGNOSIS:
 1. Respiratory arrest.
