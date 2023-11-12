@@ -5,6 +5,7 @@ from flask_socketio import SocketIO
 from haircut.agent import Agent
 from haircut.transcribe import Transcriber
 import os
+import requests
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -24,6 +25,7 @@ def mock_streaming(text):
         socketio.emit('update_output', {'partial_result': word})
         time.sleep(0.05)
 
+
 @app.route('/api/patient/text_payload', methods=['POST'])
 def text_payload():
     data = request.get_json()
@@ -34,9 +36,22 @@ def text_payload():
         patient_data = [os.path.join(dir,file) for file in os.listdir(dir) if file.endswith(tuple(allowed_extensions))]
     else:
         patient_data = None
+    print(patient_data)
     ag_res = oai_agent.process_text_payload(int(patient_id), text,patient_data)
+    if "***" in ag_res:
+        print('cool')
+        output = run_tumor_classification_model('examples/patient-1/Y105.jpg')
+        while 'error' in output:
+            output = run_tumor_classification_model(None)
+        classification, score = output
+        if classification == "Yes":
+            ag_res = ag_res +  f" \n The patient's scan was classified to be tumor free with {round(score*100)}% confidence."
+        elif classification == "No":
+            ag_res = ag_res + f" \n A tumor was detected in the patient's scan with {round(score*100)}% confidence"
+
     mock_streaming(ag_res)
     return jsonify(ag_res)
+
 
 
 @app.route('/api/patient/audio_payload', methods=['POST'])
@@ -60,6 +75,17 @@ def summary():
     summary_prompt = "Summarize the patient data in a html list with the fields " + values 
     ag_res = oai_agent.process_text_payload(patient_id, summary_prompt)
     return {"summary":ag_res}
+
+def run_tumor_classification_model(filename):
+    API_URL = "https://api-inference.huggingface.co/models/DataMinds/cnn_brain_tumor_classification"
+    hf_key = os.environ.get("HUGGING_FACE_API_KEY")
+    headers = {"Authorization": "Bearer " + hf_key}
+    with open(filename, "rb") as f:
+        data = f.read()
+    response = requests.post(API_URL, headers=headers, data=data)
+    scores = {entry['label']: entry['score'] for entry in response.json()}
+    classification = max(scores, key = scores.get)
+    return  classification, scores[classification]
 
 if __name__ == '__main__':
     socketio.run(debug=True)
