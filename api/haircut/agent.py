@@ -1,6 +1,6 @@
 from openai import OpenAI
 import os
-
+import requests
 
 class Agent:
 
@@ -72,6 +72,7 @@ class Agent:
 			  +"If I ask you to request a medicine or order a prescription for a drug, you should suggest a suitable "
 			  +"drug to prescribe (taking into account any patient allergies) if I do not specify, and ask me for confirmation. "
 			  + "if I confirm, you should add `Requesting ???<drug>???` to your response."
+			  +"If I say run classification model, then add '***Processing <the name of the patient>***'s scan to your response and do not do anything else."
 
 			#    +"Your response will at most be 30 words long so be concise."
 			)
