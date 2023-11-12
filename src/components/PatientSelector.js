@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select'
 const options = [
-    { value: 0, label: 'Simon Downs' },
-    { value: 1, label: 'Emma James' },
+    { value: 1, label: 'Simon Downs' },
+    { value: 0, label: 'Emma James' },
   ]
   
 export default function PatientSelector(props) {
