@@ -74,6 +74,7 @@ class Agent:
 			  +"drug to prescribe (taking into account any patient allergies) if I do not specify, and ask me for confirmation. "
 			  + "if I confirm, you should add `Requesting ???<drug>???` to your response."
 
+			 +"\nFor all responses, respond succinctly and concisely using at most 100 words."
 			#    +"Your response will at most be 30 words long so be concise."
 			)
 		
